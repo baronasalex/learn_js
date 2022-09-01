@@ -457,3 +457,18 @@ console.log(myFuncTest2(100, 2))
 console.log('Hello GitHub!')
 console.log('Hello GitHub!')
 console.log('Hello GitHub!')
+
+// значение параметров функции по умолчанию
+const newPost = (post, addedAt = Date()) => ({  // => ({   }) - начинаем формирование  
+    ...post,                                    // нового объекта и вернуть его НЕЯВНО
+    addedAt
+})
+
+const firstPost = {
+    id: 1,
+    author: 'Alex',
+    text: 'Hello, have a nice day!'
+}
+console.table(newPost(firstPost))
+
+//Обработка ошибок
