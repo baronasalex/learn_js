@@ -454,4 +454,6 @@ const myFuncTest2 = function(value2, multiplier2 = 3) { // нет имени, н
 console.log(myFuncTest2(100))
 console.log(myFuncTest2(100, 2)) 
 
-console.log('Helo GitHub!')
+console.log('Hello GitHub!')
+console.log('Hello GitHub!')
+console.log('Hello GitHub!')
