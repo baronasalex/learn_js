@@ -472,3 +472,29 @@ const firstPost = {
 console.table(newPost(firstPost))
 
 //Обработка ошибок
+//функция с ошибкой
+//   const fnWithError = () => {
+//       throw new Error('Some error')
+//   }
+//   fnWithError()
+//   
+//   console.log('Continue...')
+//   
+//   try {
+//       // выполнение блока кода
+//   } catch (error) {
+//       // этот блок выполняется в случае возникновения ошибок в блоке try
+//   }
+
+const fnWithError = () => {
+        throw new Error('Some error')
+    }
+
+try {
+    fnWithError()
+} catch (error) {
+    console.error(error) // полное сообщение об ошибке
+    console.log(error.message) // краткое сообщение об ошибке
+}
+
+console.log('Continue...')
