@@ -498,3 +498,89 @@ try {
 }
 
 console.log('Continue...')
+
+// МАССИВЫ
+
+const myArray = [1, 2, 3]
+console.log(myArray)
+
+const myArray2 = new Array(1, 2, 3)
+console.log(myArray2)
+
+console.log(myArray2.length)
+
+const myArray3 = [1, true, 'Alex']
+console.log(myArray[0])
+console.log(myArray[2])
+// добавление - это долго, нужно знать точную длину массива
+myArray3[3] = '127'
+
+console.log(myArray3)
+
+myArray3[1] = false
+
+console.log(myArray3)
+console.log(myArray3.length)
+
+// функции массивов
+// push - добавить элемент в конец массива
+// pop - удаляет последний элемент массива
+// shift - удаляет первый элемент в массиве
+// unshift - добавить элемент в начало массива 
+// forEach - выполняет функцию callback один раз для каждого элемента, находящегося в массиве в порядке возрастания. 
+// map - позволяет вызвать переданную функцию один раз для каждого элемента массива, формируя новый массив из результатов вызова этой функции.
+
+// чем отличается map от forEach js 
+// map() возвращает совершенно новый массив с преобразованными элементами и тем же количеством
+// данных. В случае forEach(), даже если он вернется undefined, он изменит исходный массив с 
+// помощью callback. Поэтому что map() опирается на неизменность и forEach() является мутатором.
+
+myArray3.push(4) // push - добавить элемент в конец массива
+
+console.log(myArray3)
+
+myArray3.pop() // pop - удаляет последний элемент массива
+
+console.log(myArray3)
+
+const removedElement = myArray3.pop()
+console.log(myArray3)
+console.log(removedElement)
+
+myArray3.unshift(true) // unshift - добавить элемент в начало массива
+console.log(myArray3)
+myArray3.unshift('abc')
+console.log(myArray3)
+
+myArray3.shift() // shift - удаляет первый элемент в массиве
+const removedElement2 = myArray3.shift()
+
+console.log(removedElement2)
+console.log(myArray3)
+
+const myArray4 = [1, 2, 3]
+console.log(myArray4)
+myArray4.forEach(el => console.log(el * 2))// forEach - выполняет функцию callback один раз 
+console.log(myArray4)                      // для каждого элемента, находящегося в массиве 
+myArray4.push(10)                          // в порядке возрастания.
+myArray4.forEach(el => console.log(el * 2)) 
+
+const myArray5 = [1, 2, 3]
+console.log(myArray5)
+const newArray = myArray5.map(el => el * 3) // map - позволяет вызвать переданную функцию один раз 
+console.log(newArray)                      // для каждого элемента массива, формируя новый массив 
+console.log(myArray5)                       // из результатов вызова этой функции.
+
+const newArray2 = myArray5.map((el) => {
+    return el * 3
+})
+
+console.log(newArray2)  // [ undefined, undefined, undefined ] - может быть если нет return
+
+
+// чем отличается map от forEach
+// map() возвращает совершенно новый массив с преобразованными элементами и тем же количеством
+// данных. В случае forEach(), даже если он вернется undefined, он изменит исходный массив с 
+// помощью callback. Поэтому что map() опирается на неизменность и forEach() является мутатором.
+
+// ДЕСТРУКТУРИЗАЦИЯ
