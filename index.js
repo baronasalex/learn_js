@@ -913,3 +913,273 @@ let myObjectForOf = {
 // 2. распологайте все export инструкции внизу файла
 // 3. распологайте все import инструкции сверху файла
 // 4. По возможности используйте export default
+
+
+
+/// CLASS PROTOTYPE
+// классы позволяют создавать ПРОТОТИПЫ объектов
+// на основании прототипов создаются ЭКЗЕМПЛЯРЫ
+// ЭКЗЕМПЛЯРЫ могут иметь собственные свойства и методы
+// ЭКЗЕМПЛЯРЫ наследуют свойства и методы прототипов
+
+class Comment {
+    constructor(text) {
+        this.text = text  // переменая this указывает на экземпляр класса
+        this.votesQty = 0
+    }
+
+    upvote() {
+        this.votesQty += 1
+    }
+}
+
+// создание экземпляра
+const firstComment = new Comment('First comment') // new - вызывается constructor()
+
+console.log(firstComment)
+
+// цепочка прототипов - firstComment --> Comment --> Object
+
+// проверка принадлежности - instanceof
+
+// для консоли
+// firstComment instanceof Comment // true
+// firstComment instanceof Object // true
+
+// вызов метода
+firstComment.upvote()
+console.log(firstComment.votesQty) // 1
+firstComment.upvote()                   ///// методы можно вызывать многократно
+console.log(firstComment.votesQty) // 2
+
+// проверка принадлежности свойств экземпляру объекта
+
+// const firstComment = new Comment('First comment')
+
+// для консоли
+// firstComment.hasOwnProperty('text') // true
+// firstComment.hasOwnProperty('voutesQty') // true
+// firstComment.hasOwnProperty('upvoute') // false
+// firstComment.hasOwnProperty('hasOwnProperty') // false
+
+// создание нескольких экземпляров
+
+const secondComment = new Comment('Second comment')
+console.log(secondComment)
+const thirdComment = new Comment('Third comment')
+console.log(thirdComment)
+
+
+// статические методы
+
+class Comment2 {
+    constructor(text) {
+        this.text = text  // переменая this указывает на экземпляр класса
+        this.votesQty = 0
+    }
+
+    upvote() {
+        this.votesQty += 1
+    }
+
+    static mergeComments(first, second) {
+        return `${first} ${second}`
+    }   
+}
+
+Comment2.mergeComments('First comment.', 'Second comment.')
+
+// расширение других классов
+class NumbersArray extends Array {  /// Родительский конструктор вызывается автоматически
+    sum() {
+        return this.reduce((el, acc) => acc += el, 0)
+    }
+}
+
+const myArray10 = new NumbersArray(2, 5, 7)
+
+console.log(myArray10)
+myArray10.sum()  // 14
+
+/// цепочка прототипов myArray --> NumbersArray --> Array --> Object
+
+// что такое протоип?
+// скрытое свойство, не рекомендуется менять
+// Comment.prototype === firstComment.__proto__   // true
+
+// строки и числа ведут себя как объекты
+
+// const myName = 'Alex' 
+// myName // Alex
+// myName.toUpperCase() // 'Alex'
+
+class Animal {
+    static count = 0 // начальное значение созданных экземпляров
+    constructor(view, name, food, voice, add) {
+        this.view = view
+        this.name = name
+        this.food = food
+        this.voice = voice
+        this.instanceId = ++Animal.count // счетчик экземпляров
+    }
+
+    infoShowAnimal() {
+        console.log(`${this.view} по кличке ${this.name} кушает ${this.food} и издает звуки ${this.voice}.`)
+    }
+}
+
+const dog = new Animal('Собака', 'Боб', 'кость', 'гав-гав')
+console.log(dog.instanceId)
+dog.infoShowAnimal()
+
+const cat = new Animal('Кошка', 'Софи', 'мышку', 'мяу-мяу')
+console.log(cat.instanceId)
+cat.infoShowAnimal()
+
+const pig = new Animal('Поросенок', 'Пепа', 'морковку', 'хрю-хрю')
+console.log(pig.instanceId)
+pig.infoShowAnimal()
+
+console.log('Всего было создано' + ' ' + Animal.count + ' ' + 'животных')
+
+const crow = new Animal('Ворона', 'Кар Карыч', 'орешки', 'кар-кар')
+console.log(crow.instanceId)
+crow.infoShowAnimal()
+
+console.log('Всего было создано' + ' ' + Animal.count + ' ' + 'животных')
+
+
+/// Промисы - позволяют обрабатывать ОТЛОЖЕННЫЕ во времени события
+/// Промис - ОБЕЩАНИЕ предоставить результат ПОЗЖЕ
+/// Промис может вернуть ОШИБКУ если результат предоставить НЕВОЗМОЖНО
+
+// состояние промиса
+// ожидание
+// исполнен
+// отклонен
+
+// создание промиса
+
+// const myPromise = new Promise ((resolve, reject) => {
+//     /**
+//      * Выполнение асинхронных действий
+//      * 
+//      * Внутри этой функции нужно в результате вызвать
+//      * одну из функций resolve или reject
+//      */
+// });
+
+// вновь созданный промис будете в состоянии pending
+
+// получение резульата промиса
+//myPromise
+//    .then(value => {
+//        /**
+//         * Действие в случае успешного исполнения Промиса
+//         * Значение value - это значение, переданное в вызове
+//         * функции resolve внутри Промиса
+//         */
+//    })
+//    .catch(error => {
+//        /**
+//         * Действие в случае отклонения Промиса
+//         * Значение error - это значение, переданное в вызове
+//         * функции reject внутри Промиса
+//         */
+//    })
+
+// получение данных с помощью fetch API
+//  fetch('https://jsonplaceholder.typicode.com/posts')
+//      .then(response => response.json())  // метод json возвращает Промис
+//      .then(json => console.log(json))
+//      .catch(error => console.error(error))
+
+// fetch('https://jsonplaceholder.typicode.com/posts')
+//       .then(response => {
+//   console.log(response)
+//   return response.json()
+// })
+//       .then(json => console.log(json))
+//       .catch(error => console.error(error))
+// 
+// 
+// const getData = (url) =>
+//     new Promise((resolve, reject) =>
+//     fetch(url)
+//         .then(response => response.json())
+//         .then(json => resolve(json))
+//         .catch(error => reject(error))
+//     )
+// 
+//     getData('https://jsonplaceholder.typicode.com/posts')
+//         .then(data => console.log(data))
+//         .catch(error => console.log(error.message))
+// 
+// асинхронная функци
+// async function asyncFn() {
+//     // всегда возвращает Промис
+// }
+// 
+// const asyncFn = () => {
+//     // всегда возвращает промис
+// }
+
+//  const asyncFn = async () => {
+//      return 'Succes!'
+//  }
+//  asyncFn()
+
+// модификация
+// const asyncFn = async () => {
+//     return 'Succes!'
+// }
+// asyncFn()
+//     .then(value => console.log(value))
+//     .catch(error => console.log(error.message))
+// 
+
+// await - можно ожидать результата другого промиса, можно использовать только в async ф-циях
+// const asyncFn = async () => {
+//     await <Promise>  
+// }
+// 
+// asyncFn() 
+
+const timerPromise = () => 
+    new Promise((resolve, reject) => 
+        setTimeout(() => resolve(), 2000))
+
+const asyncFn = async () => {
+    console.log('Timer starts')
+    const startTime = performance.now() // можно засеч время
+    await timerPromise()
+    const endTime = performance.now()
+    console.log('Timer ended', endTime - startTime)
+}
+
+asyncFn()
+
+// переход с промисов на  async/await
+
+// const getData = async (url) => {
+//     const res = await fatch(url)
+//     const json = await res.json()
+//     return json
+// }
+// 
+// const url = 'https://jsonplaceholder.typicode.com/todos'
+// 
+// try {
+//     const data = await getData(url)
+//     console.log(data)
+// } catch (error) {
+//     console.log(error.message)
+// }
+
+/** Главное в ASYNC/AWAIT
+ * 1. async/await - синтаксическая надстройка над промисами
+ * 2. await - синтаксис возможен только внутри async функций
+ * 3. async функция всегда возвращает Promise
+ * 4. async функция ожидает результата инструкции 
+ *    await и не выполняет последующие инструкции
+ */
